@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Observable, map } from 'rxjs';
 import { environment } from '../../../environments/environment';
@@ -13,7 +13,10 @@ export class AuthService {
   http = inject(HttpClient);
 
   register(data: RegisterRequestInterface): Observable<CurrentUserInterface> {
-    const url = environment.apiURL + '/users';
+    console.log('data=');
+    console.log(data);
+
+    const url = environment.apiUrl + '/users';
     return this.http
       .post<AuthResponseInterface>(url, data)
       .pipe(map((response) => response.user));
