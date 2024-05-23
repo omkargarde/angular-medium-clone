@@ -4,6 +4,7 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { combineLatest } from 'rxjs';
+import { BackendErrorMessagesComponent } from '../../../shared/components/backend-error-messages/backend-error-messages.component';
 import { AuthService } from '../../services/auth.service';
 import { authActions } from '../../store/actions';
 import {
@@ -16,14 +17,19 @@ import { AuthStateInterface } from './../../types/authState.interface';
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [RouterLink, ReactiveFormsModule, CommonModule],
+  imports: [
+    RouterLink,
+    ReactiveFormsModule,
+    CommonModule,
+    BackendErrorMessagesComponent,
+  ],
   templateUrl: './register.component.html',
 })
 export class RegisterComponent {
   fb = inject(FormBuilder);
   store = inject(Store<{ auth: AuthStateInterface }>);
   authService = inject(AuthService);
-  
+
   data$ = combineLatest({
     isSubmitting: this.store.select(selectIsSubmitting),
     backendErrors: this.store.select(selectValidationErrors),
