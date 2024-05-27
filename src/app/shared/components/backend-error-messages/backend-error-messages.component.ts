@@ -6,7 +6,6 @@ import { BackendErrorsInterface } from '../../types/backendError.interface';
   standalone: true,
   imports: [],
   templateUrl: './backend-error-messages.component.html',
-  styleUrl: './backend-error-messages.component.scss',
 })
 export class BackendErrorMessagesComponent implements OnInit {
   backendErrors = input.required<BackendErrorsInterface>();

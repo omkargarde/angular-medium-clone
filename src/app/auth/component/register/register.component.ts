@@ -49,6 +49,6 @@ export class RegisterComponent {
     this.store.dispatch(authActions.register({ request }));
     this.authService
       .register(request)
-      .subscribe((res) => console.log('res=' + res));
+      .subscribe((res) => console.log('res=' + JSON.stringify(res)));
   }
 }
