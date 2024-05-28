@@ -2,6 +2,7 @@ import { provideHttpClient, withFetch } from '@angular/common/http';
 import { ApplicationConfig, isDevMode } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { provideEffects } from '@ngrx/effects';
+import { provideRouterStore, routerReducer } from '@ngrx/router-store';
 import { provideState, provideStore } from '@ngrx/store';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { routes } from './app.routes';
@@ -11,9 +12,12 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideHttpClient(withFetch()),
     provideRouter(routes),
-    provideStore(),
+    provideStore({
+      router: routerReducer,
+    }),
     provideState(authFeatureKey, authReducer),
     provideEffects(authEffects),
+    provideRouterStore(),
     provideStoreDevtools({
       maxAge: 25,
       logOnly: !isDevMode(),
