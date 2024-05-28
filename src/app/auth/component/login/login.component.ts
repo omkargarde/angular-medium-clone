@@ -11,11 +11,11 @@ import {
   selectIsSubmitting,
   selectValidationErrors,
 } from '../../store/reducer';
-import { RegisterRequestInterface } from '../../types/registerRequest.interface';
-import { AuthStateInterface } from './../../types/authState.interface';
+import { AuthStateInterface } from '../../types/authState.interface';
+import { LoginRequestInterface } from '../../types/loginRequest.interface';
 
 @Component({
-  selector: 'app-register',
+  selector: 'app-login',
   standalone: true,
   imports: [
     RouterLink,
@@ -23,9 +23,9 @@ import { AuthStateInterface } from './../../types/authState.interface';
     CommonModule,
     BackendErrorMessagesComponent,
   ],
-  templateUrl: './register.component.html',
+  templateUrl: './login.component.html',
 })
-export class RegisterComponent {
+export class LoginComponent {
   fb = inject(FormBuilder);
   store = inject(Store<{ auth: AuthStateInterface }>);
   authService = inject(AuthService);
@@ -36,16 +36,15 @@ export class RegisterComponent {
   });
 
   form = this.fb.nonNullable.group({
-    username: ['', Validators.required],
     email: ['', Validators.required],
     password: ['', Validators.required],
   });
 
   onSubmit() {
     console.log('from', this.form.getRawValue());
-    const request: RegisterRequestInterface = {
+    const request: LoginRequestInterface = {
       user: this.form.getRawValue(),
     };
-    this.store.dispatch(authActions.register({ request }));
+    this.store.dispatch(authActions.login({ request }));
   }
 }
