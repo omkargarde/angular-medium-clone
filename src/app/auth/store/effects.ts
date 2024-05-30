@@ -17,9 +17,11 @@ export const getCurrentUserEffect = createEffect(
     return actions$.pipe(
       ofType(authActions.getCurrentUser),
       switchMap(() => {
+        const token = persistanceService.get('accessToken');
+        if (!token) return of(authActions.getCurrentUserFailure());
+
         return authService.getCurrentUser().pipe(
           map((currentUser: CurrentUserInterface) => {
-            persistanceService.get('accessToken');
             return authActions.getCurrentUserSuccess({ currentUser });
           }),
           catchError(() => {
@@ -30,6 +32,21 @@ export const getCurrentUserEffect = createEffect(
     );
   },
   { functional: true }
+);
+
+export const redirectAfterGetCurrentUserEffect = createEffect(
+  (actions$ = inject(Actions), router = inject(Router)) => {
+    return actions$.pipe(
+      ofType(authActions.registerSuccess),
+      tap(() => {
+        router.navigateByUrl('/');
+      })
+    );
+  },
+  {
+    functional: true,
+    dispatch: false,
+  }
 );
 
 export const registerEffect = createEffect(
