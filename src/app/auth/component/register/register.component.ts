@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterLink } from '@angular/router';
@@ -20,7 +20,7 @@ import { AuthStateInterface } from './../../types/authState.interface';
   imports: [
     RouterLink,
     ReactiveFormsModule,
-    CommonModule,
+    AsyncPipe,
     BackendErrorMessagesComponent,
   ],
   templateUrl: './register.component.html',
