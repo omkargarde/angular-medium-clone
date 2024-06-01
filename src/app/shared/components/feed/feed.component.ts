@@ -1,5 +1,12 @@
 import { AsyncPipe } from '@angular/common';
-import { Component, OnInit, computed, inject, input } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  computed,
+  effect,
+  inject,
+  input,
+} from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { combineLatest } from 'rxjs';
@@ -21,10 +28,7 @@ export class FeedComponent implements OnInit {
     error: this.store.select(selectError),
     feed: this.store.select(selectFeedData),
   });
-
   ngOnInit(): void {
-    computed(() => {
-      this.store.dispatch(feedActions.getFeed({ url: this.apiUrl() }));
-    });
+    this.store.dispatch(feedActions.getFeed({ url: this.apiUrl() }));
   }
 }
