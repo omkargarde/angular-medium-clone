@@ -1,12 +1,5 @@
 import { AsyncPipe } from '@angular/common';
-import {
-  Component,
-  OnInit,
-  computed,
-  effect,
-  inject,
-  input,
-} from '@angular/core';
+import { Component, OnInit, inject, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { combineLatest } from 'rxjs';
@@ -21,7 +14,7 @@ import { selectError, selectFeedData, selectIsLoading } from './store/reducers';
 })
 export class FeedComponent implements OnInit {
   store = inject(Store);
-  apiUrl = input<string>('');
+  apiUrl = input.required<string>();
 
   data$ = combineLatest({
     isLoading: this.store.select(selectIsLoading),
