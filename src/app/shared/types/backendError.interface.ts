@@ -1,3 +1,1 @@
-export interface BackendErrorsInterface {
-  [key: string]: string[];
-}
+export type BackendErrorsInterface = Record<string, string[]>;
