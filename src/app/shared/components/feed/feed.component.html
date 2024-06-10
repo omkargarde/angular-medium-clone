@@ -29,13 +29,14 @@
           <span>Read more...</span>
           TAG LIST
         </a>
-        <app-pagination
-          [total]="data.feed.articleCount"
-          [limit]="limit()"
-          [url]="baseUrl()"
-          [currentPage]="currentPage()"
-        />
       </div>
     }
+    <div>+++++++++++++{{ data.feed.articlesCount }}</div>
+    <app-pagination
+      [total]="data.feed.articlesCount"
+      [limit]="limit()"
+      [url]="baseUrl()"
+      [currentPage]="currentPage()"
+    />
   }
 }
